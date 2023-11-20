@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/Users/reethu/coding/Projects/Naming_Service/Solidity/contracts/domains.sol": {
-      "lastModificationDate": 1700495408949,
-      "contentHash": "a42c025ed3718be0dc8ed7e243b43cda",
+      "lastModificationDate": 1700498225011,
+      "contentHash": "ead16b97a714cb96e69fe9abeffc7a8e",
       "sourceName": "contracts/domains.sol",
       "solcConfig": {
         "version": "0.8.20",

@@ -26,6 +26,7 @@ contract Domains is ERC721URIStorage {
 
   mapping(string => address) public domains;
   mapping(string => string) public records;
+  mapping (uint => string) public names;
 
   address payable public owner;
 
@@ -36,7 +37,8 @@ contract Domains is ERC721URIStorage {
     }
 
   function register(string calldata name) public payable {
-    require(domains[name] == address(0));
+    if (domains[name] != address(0)) revert AlreadyRegistered();
+    if (!valid(name)) revert InvalidName(name);
 
     uint256 _price = price(name);
     require(msg.value >= _price, "Not enough Matic paid");
@@ -73,6 +75,7 @@ contract Domains is ERC721URIStorage {
     _setTokenURI(newRecordId, finalTokenUri);
     domains[name] = msg.sender;
 
+    names[newRecordId] = name;
     _tokenIds.increment();
   }
 
@@ -89,15 +92,14 @@ contract Domains is ERC721URIStorage {
     }
   }
   
-    function getAddress(string calldata name) public view returns (address) {
-      return domains[name];
-    }
+  function getAddress(string calldata name) public view returns (address) {
+    return domains[name];
+  }
 
   function setRecord(string calldata name, string calldata record) public {
-      // Check that the owner is the transaction sender
-      require(domains[name] == msg.sender);
-      records[name] = record;
-    }
+    if (msg.sender != domains[name]) revert Unauthorized();
+    records[name] = record;
+  }
 
   function getRecord(string calldata name) public view returns(string memory) {
       return records[name];
@@ -117,5 +119,24 @@ function withdraw() public onlyOwner {
   
   (bool success, ) = msg.sender.call{value: amount}("");
   require(success, "Failed to withdraw Matic");
-} 
+}
+
+function getAllNames() public view returns (string[] memory) {
+  console.log("Getting all names from contract");
+  string[] memory allNames = new string[](_tokenIds.current());
+  for (uint i = 0; i < _tokenIds.current(); i++) {
+    allNames[i] = names[i];
+    console.log("Name for token %d is %s", i, allNames[i]);
+  }
+
+  return allNames;
+}
+
+function valid(string calldata name) public pure returns(bool) {
+  return StringUtils.strlen(name) >= 3 && StringUtils.strlen(name) <= 10;
+}
+
+error Unauthorized();
+error AlreadyRegistered();
+error InvalidName(string name);
 }
