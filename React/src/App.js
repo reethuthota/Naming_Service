@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import './styles/App.css';
-import twitterLogo from './assets/twitter-logo.svg';
+import githubLogo from './assets/github_logo.svg';
 import { ethers } from "ethers";
 import contractABI from './utils/contractABI.json';
 // At the very top of the file, after the other imports
@@ -10,8 +10,8 @@ import { networks } from './utils/networks.js';
 
 
 // Constants
-const TWITTER_HANDLE = '_buildspace';
-const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
+const GITHUB_HANDLE = 'reethuthota';
+const GITHUB_LINK = `https://github.com/${GITHUB_HANDLE}`;
 // Add the domain you will be minting
 const tld = '.ninja';
 const CONTRACT_ADDRESS = '0xEF68ad5944C0844532C8FeF6Ba9b5a05424A15b5';
@@ -356,13 +356,13 @@ const App = () => {
 				{ mints && renderMints() }
 
 				<div className="footer-container">
-					<img alt="Twitter Logo" className="twitter-logo" src={twitterLogo} />
+					<img alt="Github Logo" className="github-logo" src={githubLogo} style={{ height: '35px'}}/>
 					<a
 						className="footer-text"
-						href={TWITTER_LINK}
+						href={GITHUB_LINK}
 						target="_blank"
 						rel="noreferrer"
-					>{`built with @${TWITTER_HANDLE}`}</a>
+					>{`built with @${GITHUB_HANDLE}`}</a>
 				</div>
 			</div>
 		</div>
