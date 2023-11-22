@@ -1,13 +1,52 @@
-# Sample Hardhat Project
+# Polygon ENS (Ethereum Name Service)
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
+## Overview
 
-Try running some of the following tasks:
+This project is a decentralized naming service using Solidity for the backend smart contracts and React for the frontend interface. It allows users to register and manage unique names associated with Ethereum addresses on the Polygon network.
 
-```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat run scripts/deploy.js
+### Features
+
+- **Name Registration:** Users can register unique names tied to their Ethereum addresses on the Polygon network.
+- **Transfer of Ownership:** Owners can transfer name ownership to other addresses.
+- **Frontend Interface:** Built with React to interact with the Solidity smart contracts.
+
+## Installation
+
+### Prerequisites
+
+- Node.js & npm installed
+- Metamask extension or any Ethereum-enabled browser
+
+### Backend (Solidity)
+
+1. Navigate to the `Solidity` directory.
+2. Install dependencies with `npm install`.
+3. Compile the Solidity contracts using a Solidity compiler like `solc`.
+
+   ```bash
+   npx hardhat compile
+4. Deploy the contracts to the Polygon Mumbai testnet using Hardhat
+    ```bash
+    npx hardhat run scripts/deploy.js --network mumbai
+### Frontend (React) 
+1. Navigate to the `React` directory.
+2. Install dependencies with `npm install`.
+3. Start the development server.
+
+## Deploying to Mainnet
+To deploy the contracts to the Polygon mainnet, modify the deployment script to target the mainnet in scripts/deploy.js, and execute the deployment command again.
+
+## Testing
+The project includes unit tests for the Solidity contracts and frontend components.
+
+### Backend Tests
+1. Navigate to the `Solidity` directory.
+2. Run Solidity contract tests with Hardhat.
+  ```bash
+  npx hardhat test
+  ```
+### Frontend Tests
+Frontend tests can be executed within the `React` directory.
+```bash
+npm test
 ```
