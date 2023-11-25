@@ -85,6 +85,7 @@ header{
   flex-direction: column;
   margin: auto;
   width: 600px;
+  font-size: 20px;
 }
 
 .connect-wallet-container img {
