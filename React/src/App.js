@@ -340,7 +340,7 @@ const App = () => {
 				<div className="header-container">
 					<header>
 						<div className="left">
-							<p className="title">CryptoConnect Name Service💰🤑</p>
+							<p className="title">CryptoConnect Naming Service💰🤑</p>
 							<p className="subtitle">Your immortal API on the blockchain!</p>
 						</div>
 						{/* Display a logo and wallet connection status*/}
