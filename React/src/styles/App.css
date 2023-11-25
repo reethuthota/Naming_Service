@@ -33,11 +33,13 @@ header{
   font-size: 35px;
   font-weight: bold;
   color: white;
+  font-family: 'Courier New', sans-serif;
 }
 
 .subtitle {
   font-size: 25px;
   color: white;
+  font-family: 'Courier New', sans-serif;
 }
 
 .left{
@@ -62,7 +64,7 @@ header{
 }
 
 .content-container {
-  background-color: #a200d6;
+  background-color: #cf556c;
 }
 
 .cta-button {
@@ -104,7 +106,7 @@ header{
 }
 
 .mint-button {
-  background: -webkit-linear-gradient(left, #a200d6, #ff6fdf);
+  background: -webkit-linear-gradient(left, #b12a5b, #ff8177);
   font-size: 18px;
   background-size: 200% 200%;
   animation: gradient-animation 4s ease infinite;
@@ -173,7 +175,7 @@ input{
   color: white;
   letter-spacing: 1px;
   font-size: 26px;
-  width: 400px;
+  width: 500px;
   margin-bottom: 10px;
   padding: 10px 20px;
   text-align: center;
