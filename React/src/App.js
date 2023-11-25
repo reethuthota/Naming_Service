@@ -13,8 +13,8 @@ import { networks } from './utils/networks.js';
 const GITHUB_HANDLE = 'reethuthota';
 const GITHUB_LINK = `https://github.com/${GITHUB_HANDLE}`;
 // Add the domain you will be minting
-const tld = '.ninja';
-const CONTRACT_ADDRESS = '0xEF68ad5944C0844532C8FeF6Ba9b5a05424A15b5';
+const tld = '.CryptoConnect';
+const CONTRACT_ADDRESS = '0xfF3b91029F7965F894BaC1bd5F0Fe927CB7f951F';
 
 const App = () => {
 	const [network, setNetwork] = useState('');
@@ -305,7 +305,7 @@ const App = () => {
 				<input
 					type="text"
 					value={record}
-					placeholder='whats ur ninja power?'
+					placeholder='whats your super power?'
 					onChange={e => setRecord(e.target.value)}
 				/>
 				{/* If the editing variable is true, return the "Set record" and "Cancel" button */}
@@ -340,7 +340,7 @@ const App = () => {
 				<div className="header-container">
 					<header>
 						<div className="left">
-							<p className="title">🐱‍👤 Ninja Name Service</p>
+							<p className="title">🐱‍👤 CryptoConnect Name Service</p>
 							<p className="subtitle">Your immortal API on the blockchain!</p>
 						</div>
 						{/* Display a logo and wallet connection status*/}
