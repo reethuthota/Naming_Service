@@ -7,7 +7,6 @@ This project is a decentralized naming service using Solidity for the backend sm
 ### Features
 
 - **Name Registration:** Users can register unique names tied to their Ethereum addresses on the Polygon network.
-- **Transfer of Ownership:** Owners can transfer name ownership to other addresses.
 - **Frontend Interface:** Built with React to interact with the Solidity smart contracts.
 
 ## Installation
