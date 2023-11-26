@@ -362,7 +362,7 @@ const App = () => {
 						href={GITHUB_LINK}
 						target="_blank"
 						rel="noreferrer"
-					>{`built with @${GITHUB_HANDLE}`}</a>
+					>{`@${GITHUB_HANDLE}`}</a>
 				</div>
 			</div>
 		</div>
