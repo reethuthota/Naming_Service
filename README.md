@@ -35,18 +35,3 @@ This project is a decentralized naming service using Solidity for the backend sm
 
 ## Deploying to Mainnet
 To deploy the contracts to the Polygon mainnet, modify the deployment script to target the mainnet in scripts/deploy.js, and execute the deployment command again.
-
-## Testing
-The project includes unit tests for the Solidity contracts and frontend components.
-
-### Backend Tests
-1. Navigate to the `Solidity` directory.
-2. Run Solidity contract tests with Hardhat.
-  ```bash
-  npx hardhat test
-  ```
-### Frontend Tests
-Frontend tests can be executed within the `React` directory.
-```bash
-npm test
-```
