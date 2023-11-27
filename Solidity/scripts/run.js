@@ -1,3 +1,7 @@
+  // Hardhat will create a local Ethereum network for us, but just for this contract. 
+  // Then after the script completes, it will destroy that local network. 
+  //So, every time you run the contract it will be a fresh blockchain.
+  
   const main = async () => {
     const [owner, superCoder] = await hre.ethers.getSigners();
     const domainContractFactory = await hre.ethers.getContractFactory('Domains');
