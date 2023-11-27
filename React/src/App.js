@@ -3,7 +3,6 @@ import './styles/App.css';
 import githubLogo from './assets/github_logo.svg';
 import { ethers } from "ethers";
 import contractABI from './utils/contractABI.json';
-// At the very top of the file, after the other imports
 import polygonLogo from './assets/polygonlogo.png';
 import ethLogo from './assets/ethlogo.png';
 import { networks } from './utils/networks.js';
@@ -27,18 +26,19 @@ const App = () => {
 
 	const connectWallet = async () => {
 		try {
-			const { ethereum } = window;
+			const { ethereum } = window; //getting ethereum object (wallets) in your window (browser)
 
-			if (!ethereum) {
-				alert("Get MetaMask -> https://metamask.io/");
+			//if etheruem object isn't found, alert is generated 
+			if (!ethereum) { 
+				alert("Get MetaMask -> https://metamask.io/"); 
 				return;
 			}
 
-			const accounts = await ethereum.request({ method: "eth_requestAccounts" });
+			const accounts = await ethereum.request({ method: "eth_requestAccounts" }); //Requesting the accounts presents from the ethereum wallet
 
-			console.log("Connected", accounts[0]);
-			setCurrentAccount(accounts[0]);
-		} catch (error) {
+			console.log("Connected", accounts[0]); 
+			setCurrentAccount(accounts[0]); //Connecting to the first account present
+		} catch (error) { //if there is any error while connecting to the wallet, you catch it
 			console.log(error);
 		}
 	}
@@ -87,6 +87,7 @@ const App = () => {
 	const checkIfWalletIsConnected = async () => {
 		const { ethereum } = window;
 
+		// Checking if ethereum object (wallet) is found on browser
 		if (!ethereum) {
 			console.log('Make sure you have metamask!');
 			return;
@@ -94,21 +95,23 @@ const App = () => {
 			console.log('We have the ethereum object', ethereum);
 		}
 
+		// Used to retrieve the accounts connected to the user's wallet. 
 		const accounts = await ethereum.request({ method: 'eth_accounts' });
 
+		// Checking if there are any authorized accounts that are found
 		if (accounts.length !== 0) {
 			const account = accounts[0];
 			console.log('Found an authorized account:', account);
-			setCurrentAccount(account);
+			setCurrentAccount(account); //Setting account to the first authorised account found
 		} else {
 			console.log('No authorized account found');
 		}
 
-		// This is the new part, we check the user's network chain ID
+		// Check the user's network chain ID
 		const chainId = await ethereum.request({ method: 'eth_chainId' });
 		setNetwork(networks[chainId]);
 
-		ethereum.on('chainChanged', handleChainChanged);
+		ethereum.on('chainChanged', handleChainChanged); // event listener to detect changes in user's network. Triggers handleChainChanged function
 
 		// Reload the page when they change networks
 		function handleChainChanged(_chainId) {
@@ -116,14 +119,39 @@ const App = () => {
 		}
 	};
 
+	const withdrawFunds = async () => {
+		try {
+			const { ethereum } = window;
+			if (ethereum) {
+				const provider = new ethers.providers.Web3Provider(ethereum);
+				const signer = provider.getSigner();
+				const contract = new ethers.Contract(CONTRACT_ADDRESS, contractABI.abi, signer);
+
+				const tx = await contract.withdraw();
+				await tx.wait();
+
+				console.log("Funds withdrawn successfully!");
+				// You can add a notification or update the UI as needed
+			}
+		} catch (error) {
+			console.error("Error withdrawing funds:", error);
+			// Handle the error as needed (e.g., show an error message)
+		}
+	};
+
 	const mintDomain = async () => {
 		// Don't run if the domain is empty
 		if (!domain) { return }
-		// Alert the user if the domain is too short
+		// Alert the user if the domain is too short or long
 		if (domain.length < 3) {
 			alert('Domain must be at least 3 characters long');
 			return;
 		}
+		if (domain.length > 10) {
+			alert('Domain must be less than 10 characters long');
+			return;
+		}
+
 		// Calculate price based on length of domain (change this to match your contract)	
 		// 3 chars = 0.5 MATIC, 4 chars = 0.3 MATIC, 5 or more = 0.1 MATIC
 		const price = domain.length === 3 ? '0.5' : domain.length === 4 ? '0.3' : '0.1';
@@ -131,8 +159,8 @@ const App = () => {
 		try {
 			const { ethereum } = window;
 			if (ethereum) {
-				const provider = new ethers.providers.Web3Provider(ethereum);
-				const signer = provider.getSigner();
+				const provider = new ethers.providers.Web3Provider(ethereum); // This provider object that interacts with the Ethereum blockchain through ethereum object (metamask)
+				const signer = provider.getSigner(); // This retrieves a signer object from the provider. signer is used to authorise transactions
 				const contract = new ethers.Contract(CONTRACT_ADDRESS, contractABI.abi, signer);
 
 				console.log("Going to pop wallet now to pay gas...")
@@ -322,9 +350,14 @@ const App = () => {
 					</div>
 				) : (
 					// If editing is not true, the mint button will be returned instead
-					<button className='cta-button mint-button' disabled={loading} onClick={mintDomain}>
-						Mint
-					</button>
+					<div>
+						<button className='cta-button mint-button' disabled={loading} onClick={mintDomain}>
+							Mint
+						</button>
+						<button className='cta-button mint-button' onClick={withdrawFunds}>
+							Withdraw Funds
+						</button>
+					</div>
 				)}
 			</div>
 		);
@@ -351,9 +384,9 @@ const App = () => {
 					</header>
 				</div>
 
-				{ !currentAccount && renderNotConnectedContainer() }
-				{ currentAccount && renderInputForm() }
-				{ mints && renderMints() }
+				{!currentAccount && renderNotConnectedContainer()}
+				{currentAccount && renderInputForm()}
+				{mints && renderMints()}
 
 				<div className="footer-container">
 					<img alt="Github Logo" className="github-logo" src={githubLogo} />
@@ -368,7 +401,7 @@ const App = () => {
 		</div>
 	);
 
-	
+
 };
 
 export default App;
