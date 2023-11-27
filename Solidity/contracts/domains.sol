@@ -29,7 +29,7 @@ contract Domains is ERC721URIStorage {
 
   // Constructor initializes the contract, sets the owner, specifies the top-level domain
   constructor(string memory _tld) ERC721 ("CryptoConnect Name Service", "CCNS") payable {
-    owner = payable(msg.sender);
+    owner = payable(msg.sender); //msg.sender is the wallet address of the person who called the function.
     tld = _tld;
     console.log("%s name service deployed", _tld);
   }
@@ -39,7 +39,7 @@ contract Domains is ERC721URIStorage {
     if (!valid(name)) revert InvalidName(name); // Checks if the provided domain name meets the length criteria (between 3 and 10 characters). Reverts with an InvalidName error.
 
     uint256 _price = price(name); // Determines the price for registering the domain based on its length.
-    require(msg.value >= _price, "Not enough Matic paid"); 
+    require(msg.value >= _price, "Not enough Matic paid");  // Check if enough Matic was paid in the transaction
     
     string memory _name = string(abi.encodePacked(name, ".", tld)); // Combine the name passed into the function with the TLD
     
@@ -89,51 +89,51 @@ contract Domains is ERC721URIStorage {
     }
   }
   
+  // This will give us the domain owners' address
   function getAddress(string calldata name) public view returns (address) {
     return domains[name];
   }
 
   function setRecord(string calldata name, string calldata record) public {
-    if (msg.sender != domains[name]) revert Unauthorized();
+    if (msg.sender != domains[name]) revert Unauthorized(); // Check that the owner is the transaction sender. Revert Unauthorized error
     records[name] = record;
   }
 
   function getRecord(string calldata name) public view returns(string memory) {
-      return records[name];
+    return records[name];
   }
 
   modifier onlyOwner() {
   require(isOwner());
-  _;
-}
+  _; }
 
-function isOwner() public view returns (bool) {
-  return msg.sender == owner;
-}
-
-function withdraw() public onlyOwner {
-  uint amount = address(this).balance;
-  
-  (bool success, ) = msg.sender.call{value: amount}("");
-  require(success, "Failed to withdraw Matic");
-}
-
-function getAllNames() public view returns (string[] memory) {
-  console.log("Getting all names from contract");
-  string[] memory allNames = new string[](_tokenIds.current());
-  for (uint i = 0; i < _tokenIds.current(); i++) {
-    allNames[i] = names[i];
-    console.log("Name for token %d is %s", i, allNames[i]);
+  function isOwner() public view returns (bool) {
+    return msg.sender == owner;
   }
 
-  return allNames;
-}
+  function withdraw() public onlyOwner {
+    uint amount = address(this).balance;
+    
+    (bool success, ) = msg.sender.call{value: amount}("");
+    require(success, "Failed to withdraw Matic");
+  }
 
-function valid(string calldata name) public pure returns(bool) {
-  return StringUtils.strlen(name) >= 3 && StringUtils.strlen(name) <= 10;
-}
+  function getAllNames() public view returns (string[] memory) {
+    console.log("Getting all names from contract");
+    string[] memory allNames = new string[](_tokenIds.current());
+    for (uint i = 0; i < _tokenIds.current(); i++) {
+      allNames[i] = names[i];
+      console.log("Name for token %d is %s", i, allNames[i]);
+    }
 
-error Unauthorized();
-error AlreadyRegistered();
-error InvalidName(string name);
+    return allNames;
+  }
+
+  function valid(string calldata name) public pure returns(bool) {
+    return StringUtils.strlen(name) >= 3 && StringUtils.strlen(name) <= 10;
+  }
+
+  error Unauthorized();
+  error AlreadyRegistered();
+  error InvalidName(string name);
 }
