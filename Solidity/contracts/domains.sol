@@ -89,28 +89,33 @@ contract Domains is ERC721URIStorage {
     }
   }
   
-  // This will give us the domain owners' address
+  // This will give us the domain owners' address given the domain name
   function getAddress(string calldata name) public view returns (address) {
     return domains[name];
   }
 
+  // This sets a record for a domain.
   function setRecord(string calldata name, string calldata record) public {
     if (msg.sender != domains[name]) revert Unauthorized(); // Check that the owner is the transaction sender. Revert Unauthorized error
     records[name] = record;
   }
 
+  // This retrieves the record associated with a particular domain.
   function getRecord(string calldata name) public view returns(string memory) {
     return records[name];
   }
 
+  // This ensures that only the owner (who deployed the contract) can execute certain functions.
   modifier onlyOwner() {
   require(isOwner());
   _; }
 
+  // This checks if the caller of the function is the owner of the contract.
   function isOwner() public view returns (bool) {
     return msg.sender == owner;
   }
 
+  // This allows the owner to withdraw the balance of the contract. Only the owner can execute this function.
   function withdraw() public onlyOwner {
     uint amount = address(this).balance;
     
@@ -118,6 +123,7 @@ contract Domains is ERC721URIStorage {
     require(success, "Failed to withdraw Matic");
   }
 
+  // This retrieves all the names stored in the contract and logs them
   function getAllNames() public view returns (string[] memory) {
     console.log("Getting all names from contract");
     string[] memory allNames = new string[](_tokenIds.current());
@@ -129,6 +135,7 @@ contract Domains is ERC721URIStorage {
     return allNames;
   }
 
+  // This checks if a given domain name is of valid length (between 3 and 10 characters).
   function valid(string calldata name) public pure returns(bool) {
     return StringUtils.strlen(name) >= 3 && StringUtils.strlen(name) <= 10;
   }
