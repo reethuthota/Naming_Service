@@ -1,6 +1,12 @@
+body {
+  background-image: url('https://img.freepik.com/free-vector/gradient-colored-network-connection-background_52683-59558.jpg?w=2000&t=st=1701088550~exp=1701089150~hmac=1f3a5d9d52a4bbb6a741ab89be42402b8ae535c70c5b85a0705a3ad534ccfcc4');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 .App {
   height: 100vh;
-  background-color: #0d1116;
   text-align: center;
   color: white;
 }
@@ -11,7 +17,6 @@ p {
 
 .container {
   height: 100%;
-  background-color: #181818;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -160,6 +165,7 @@ header{
   color: white;
   font-size: 16px;
   font-weight: bold;
+  padding-right: 10px;
 }
 
 .form-container{
