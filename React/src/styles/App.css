@@ -86,6 +86,7 @@ header{
   margin: auto;
   width: 600px;
   font-size: 20px;
+  max-width: 100%;
 }
 
 .connect-wallet-container img {
@@ -141,7 +142,6 @@ header{
 .edit-icon{
   width: 12px;
 }
-
 
 .footer-container {
   display: flex;
