@@ -1,5 +1,6 @@
 # Polygon ENS (Ethereum Name Service)
-<img width="1512" alt="Web Display" src="https://github.com/reethuthota/Naming_Service/assets/129527629/e569c352-9a57-4738-92ca-4c70bd670c0a">
+<img width="1512" alt="Screenshot 2023-11-28 at 11 55 08 AM" src="https://github.com/reethuthota/Naming_Service/assets/129527629/08ea84a6-1d52-4129-9553-eaa5761a16ae">
+
 
 ## Overview
 
