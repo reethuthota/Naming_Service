@@ -1,6 +1,5 @@
 # Polygon ENS (Ethereum Name Service)
-<img width="1512" alt="Screenshot 2023-11-28 at 11 55 08 AM" src="https://github.com/reethuthota/Naming_Service/assets/129527629/08ea84a6-1d52-4129-9553-eaa5761a16ae">
-
+<img width="1512" alt="CryptoConnect Website" src="https://github.com/reethuthota/Naming_Service/assets/129527629/ab9f50ce-867d-417f-8f51-c5d5d881067f">
 
 ## Overview
 
