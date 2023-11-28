@@ -7,10 +7,6 @@ import polygonLogo from './assets/polygonlogo.png';
 import ethLogo from './assets/ethlogo.png';
 import { networks } from './utils/networks.js';
 
-
-// Constants
-//const GITHUB_HANDLE = 'reethuthota';
-//const GITHUB_LINK = `https://github.com/${GITHUB_HANDLE}`;
 // Add the domain you will be minting
 const tld = '.CryptoConnect';
 const CONTRACT_ADDRESS = '0xfF3b91029F7965F894BaC1bd5F0Fe927CB7f951F';
@@ -393,30 +389,6 @@ const App = () => {
 						target="_blank"
 						rel="noreferrer"
 					>{`@reethuthota`}</a>
-					<a
-						className="footer-text"
-						href={'https://github.com/shreyasrajiv327'}
-						target="_blank"
-						rel="noreferrer"
-					>{`@shreyasrajiv327`}</a>
-					<a
-						className="footer-text"
-						href={'https://github.com/n-avanthi'}
-						target="_blank"
-						rel="noreferrer"
-					>{`@n-avanthi`}</a>
-					<a
-						className="footer-text"
-						href={'https://github.com/monish2000'}
-						target="_blank"
-						rel="noreferrer"
-					>{`@monish2000`}</a>
-					<a
-						className="footer-text"
-						href={'https://github.com/Sruttz'}
-						target="_blank"
-						rel="noreferrer"
-					>{`@Sruttz`}</a>
 				</div>
 			</div>
 		</div>
