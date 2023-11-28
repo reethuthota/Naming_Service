@@ -123,19 +123,17 @@ const App = () => {
 		try {
 			const { ethereum } = window;
 			if (ethereum) {
-				const provider = new ethers.providers.Web3Provider(ethereum);
-				const signer = provider.getSigner();
-				const contract = new ethers.Contract(CONTRACT_ADDRESS, contractABI.abi, signer);
+				const provider = new ethers.providers.Web3Provider(ethereum); // This helps in interaction with the Ethereum blockchain through ethereum object (metamask)
+				const signer = provider.getSigner();  // This retrieves a signer object from the provider. signer is used to authorise transactions
+				const contract = new ethers.Contract(CONTRACT_ADDRESS, contractABI.abi, signer); // Creates an instance of the smart contract
 
-				const tx = await contract.withdraw();
-				await tx.wait();
+				const tx = await contract.withdraw(); // It calls the withdraw function on the smart contract instance
+				await tx.wait(); // Waits for transation to be processed on the ethereum blockchain
 
 				console.log("Funds withdrawn successfully!");
-				// You can add a notification or update the UI as needed
 			}
 		} catch (error) {
 			console.error("Error withdrawing funds:", error);
-			// Handle the error as needed (e.g., show an error message)
 		}
 	};
 
@@ -159,14 +157,14 @@ const App = () => {
 		try {
 			const { ethereum } = window;
 			if (ethereum) {
-				const provider = new ethers.providers.Web3Provider(ethereum); // This provider object that interacts with the Ethereum blockchain through ethereum object (metamask)
+				const provider = new ethers.providers.Web3Provider(ethereum); // This helps in interaction with the Ethereum blockchain through ethereum object (metamask)
 				const signer = provider.getSigner(); // This retrieves a signer object from the provider. signer is used to authorise transactions
-				const contract = new ethers.Contract(CONTRACT_ADDRESS, contractABI.abi, signer);
+				const contract = new ethers.Contract(CONTRACT_ADDRESS, contractABI.abi, signer); // Creates an instance of the smart contract
 
 				console.log("Going to pop wallet now to pay gas...")
+				// Register the domain
 				let tx = await contract.register(domain, { value: ethers.utils.parseEther(price) });
-				// Wait for the transaction to be mined
-				const receipt = await tx.wait();
+				const receipt = await tx.wait(); // Wait for the transaction to be mined
 
 				// Check if the transaction was successfully completed
 				if (receipt.status === 1) {
@@ -175,7 +173,6 @@ const App = () => {
 					// Set the record for the domain
 					tx = await contract.setRecord(domain, record);
 					await tx.wait();
-
 					console.log("Record set! https://mumbai.polygonscan.com/tx/" + tx.hash);
 
 					// Call fetchMints after 2 seconds
@@ -198,7 +195,6 @@ const App = () => {
 		try {
 			const { ethereum } = window;
 			if (ethereum) {
-				// You know all this
 				const provider = new ethers.providers.Web3Provider(ethereum);
 				const signer = provider.getSigner();
 				const contract = new ethers.Contract(CONTRACT_ADDRESS, contractABI.abi, signer);
@@ -233,10 +229,9 @@ const App = () => {
 		}
 	}, [currentAccount, network]);
 
-
 	const updateDomain = async () => {
 		if (!record || !domain) { return }
-		setLoading(true);
+		setLoading(true); // Indicates that some operation is in progress
 		console.log("Updating domain", domain, "with record", record);
 		try {
 			const { ethereum } = window;
@@ -245,7 +240,7 @@ const App = () => {
 				const signer = provider.getSigner();
 				const contract = new ethers.Contract(CONTRACT_ADDRESS, contractABI.abi, signer);
 
-				let tx = await contract.setRecord(domain, record);
+				let tx = await contract.setRecord(domain, record); // Calls the setRecord function from contracts
 				await tx.wait();
 				console.log("Record set https://mumbai.polygonscan.com/tx/" + tx.hash);
 
@@ -256,10 +251,11 @@ const App = () => {
 		} catch (error) {
 			console.log(error);
 		}
-		setLoading(false);
+		setLoading(false); // 
 	}
 
 	// Render methods
+	// Renders the GIF and the connect wallet button
 	const renderNotConnectedContainer = () => (
 		<div className="connect-wallet-container">
 			<img src="https://media.giphy.com/media/KK7yJR1ejwr1OFYAgm/giphy.gif" alt="gif" />
@@ -270,6 +266,7 @@ const App = () => {
 		</div>
 	);
 
+	// Renders a list of recently minted domains if there is a connected account
 	const renderMints = () => {
 		if (currentAccount && mints.length > 0) {
 			return (
